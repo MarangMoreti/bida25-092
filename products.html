@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Browse our delicious cake collection at Mtee's Cakehouse. Birthday cakes, wedding cakes, cupcakes, and more. Order online for delivery.">
+    <meta name="keywords" content="cakes for sale, birthday cakes, wedding cakes, cupcakes, cake flavors, Mtee's Cakehouse products">
+    <meta name="author" content="Mtee's Cakehouse">
+    <title>Our Products | Mtee's Cakehouse</title>
+
+    <!--Favicon-->
+    <link rel="icon" type="image/x-icon" href="logo/logo.png">
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Additional page-specific styles */
+        .filter-btn {
+            background-color: var(--bg-warm);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .product-img {
+            height: 280px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        
+        .img-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+        }
+        
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .product-card:hover .product-overlay {
+            transform: translateY(0);
+        }
+        
+        .quick-view-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-view-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .flavor-tag {
+            background-color: var(--bg-warm);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            color: var(--primary-color);
+            display: inline-block;
+        }
+        
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary-dark);
+        }
+        
+        .custom-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .custom-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-dark);
+        }
+        
+        .category-section {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-dark);
+        }
+        
+        /* Modal Styles */
+        .custom-modal .modal-content {
+            border-radius: 20px;
+            border: none;
+        }
+        
+        .custom-modal .modal-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 25px;
+        }
+        
+        .custom-modal .modal-body {
+            padding: 25px;
+        }
+        
+        .custom-modal .modal-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 15px 25px;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-btn {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+            .category-title {
+                font-size: 1.4rem;
+            }
+            .price {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar - Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
+        <div class="container">
+             <a class="navbar-brand" href="index.html">
+                <img src="logo/logo.png" alt="Mtee's Cakehouse Logo" class="logo-img" style="height: 55px; width: auto;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-order-nav" href="order.html">Order Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero">
+        <div class="container text-center">
+            <h1>Our Delicious Collection</h1>
+            <p class="lead">Freshly baked daily with love and the finest ingredients</p>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="py-4 bg-white sticky-top" style="top: 70px; z-index: 99; box-shadow: var(--shadow-sm);">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <button class="filter-btn active" data-filter="all">All Cakes</button>
+                <button class="filter-btn" data-filter="birthday">Birthday Cakes</button>
+                <button class="filter-btn" data-filter="wedding">Wedding Cakes</button>
+                <button class="filter-btn" data-filter="cupcakes">Cupcakes</button>
+                <button class="filter-btn" data-filter="specialty">Specialty</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="py-5 bg-warm">
+        <div class="container">
+            
+            <!-- Birthday Cakes Category -->
+            <div class="category-section" data-category="birthday">
+                <h2 class="category-title">Birthday Cakes</h2>
+                <div class="row g-4">
+                    <!-- Product 1 - Classic Chocolate -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="birthday">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/1.avif" class="card-img-top product-img" alt="Classic Chocolate Cake">
+                                <span class="product-badge"><span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Best Seller</span></span>
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="chocolate">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Classic Chocolate</h3>
+                                <p class="card-text text-light-brown small">Rich chocolate layers with creamy chocolate ganache</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Chocolate</span>
+                                    <span class="flavor-tag">Dark Chocolate</span>
+                                </div>
+                                <p class="price mb-3">P850 <small class="text-light-brown">per kg</small></p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 - Red Velvet -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="birthday">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/red.avif" class="card-img-top product-img" alt="Red Velvet Cake">
+                                <span class="product-badge"><span class="badge bg-danger text-white px-3 py-2 rounded-pill">Popular</span></span>
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="redvelvet">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Red Velvet</h3>
+                                <p class="card-text text-light-brown small">Velvety red cake with cream cheese frosting</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Red Velvet</span>
+                                    <span class="flavor-tag">Cream Cheese</span>
+                                </div>
+                                <p class="price mb-3">P950 <small class="text-light-brown">per kg</small></p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 - Rainbow Celebration -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="birthday">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/3.avif" class="card-img-top product-img" alt="Rainbow Cake">
+                                <span class="product-badge"><span class="badge bg-success text-white px-3 py-2 rounded-pill">New</span></span>
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="rainbow">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Rainbow Celebration</h3>
+                                <p class="card-text text-light-brown small">Colorful layers with vanilla buttercream</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Vanilla</span>
+                                    <span class="flavor-tag">Rainbow</span>
+                                </div>
+                                <p class="price mb-3">P900 <small class="text-light-brown">per kg</small></p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wedding Cakes Category -->
+            <div class="category-section mt-5" data-category="wedding">
+                <h2 class="category-title">Wedding Cakes</h2>
+                <div class="row g-4">
+                    <!-- Product 4 - Elegant White Wedding -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="wedding">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/4.avif" class="card-img-top product-img" alt="Elegant White Wedding Cake">
+                                <span class="product-badge"><span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Best Seller</span></span>
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="whitewedding">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Elegant White Wedding</h3>
+                                <p class="card-text text-light-brown small">Classic white cake with delicate floral accents</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Vanilla</span>
+                                    <span class="flavor-tag">Almond</span>
+                                </div>
+                                <p class="price mb-3">P2,500 <small class="text-light-brown">starting</small></p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 - Rustic Naked Cake -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="wedding">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/5.avif" class="card-img-top product-img" alt="Rustic Naked Cake">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="rustic">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Rustic Naked Cake</h3>
+                                <p class="card-text text-light-brown small">Semi-naked cake with fresh berries and greenery</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Lemon</span>
+                                    <span class="flavor-tag">Berry</span>
+                                </div>
+                                <p class="price mb-3">P2,800 <small class="text-light-brown">starting</small></p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 6 - Rose Gold Elegance -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="wedding">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/6.webp" class="card-img-top product-img" alt="Rose Gold Wedding Cake">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="rosegold">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Rose Gold Elegance</h3>
+                                <p class="card-text text-light-brown small">Rose gold drip cake with edible pearls</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Chocolate</span>
+                                    <span class="flavor-tag">Raspberry</span>
+                                </div>
+                                <p class="price mb-3">P3,200 <small class="text-light-brown">starting</small></p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cupcakes Category -->
+            <div class="category-section mt-5" data-category="cupcakes">
+                <h2 class="category-title">Cupcakes</h2>
+                <div class="row g-4">
+                    <!-- Product 7 - Assorted Cupcakes -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="cupcakes">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/7.avif" class="card-img-top product-img" alt="Assorted Cupcakes">
+                                <span class="product-badge"><span class="badge bg-success text-white px-3 py-2 rounded-pill">New</span></span>
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="cupcakeassorted">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Assorted Cupcakes</h3>
+                                <p class="card-text text-light-brown small">Box of 6 mixed flavor cupcakes</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Chocolate</span>
+                                    <span class="flavor-tag">Vanilla</span>
+                                    <span class="flavor-tag">Strawberry</span>
+                                </div>
+                                <p class="price mb-3">P250 <small class="text-light-brown">per box</small></p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 8 - Red Velvet Cupcake -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="cupcakes">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/8.avif" class="card-img-top product-img" alt="Red Velvet Cupcake">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="redvelvetcupcake">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Red Velvet Cupcake</h3>
+                                <p class="card-text text-light-brown small">Mini red velvet with cream cheese frosting</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Red Velvet</span>
+                                </div>
+                                <p class="price mb-3">P220 <small class="text-light-brown">per box of 6</small></p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specialty Cakes Category -->
+            <div class="category-section mt-5" data-category="specialty">
+                <h2 class="category-title">Specialty Cakes</h2>
+                <div class="row g-4">
+                    <!-- Product 9 - New York Cheesecake -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="specialty">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/9.avif" class="card-img-top product-img" alt="New York Cheesecake">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="cheesecake">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">New York Cheesecake</h3>
+                                <p class="card-text text-light-brown small">Creamy cheesecake with graham cracker crust</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Cheese</span>
+                                    <span class="flavor-tag">Berry Topping</span>
+                                </div>
+                                <p class="price mb-3">P1,200</p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 10 - Carrot Walnut Cake -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="specialty">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/10.avif" class="card-img-top product-img" alt="Carrot Walnut Cake">
+                                <span class="product-badge"><span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Best Seller</span></span>
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="carrot">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Carrot Walnut Cake</h3>
+                                <p class="card-text text-light-brown small">Spiced carrot cake with walnuts and cream cheese</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Carrot</span>
+                                    <span class="flavor-tag">Walnut</span>
+                                </div>
+                                <p class="price mb-3">P1,100</p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 11 - Fresh Fruit Cake -->
+                    <div class="col-md-6 col-lg-4 product-item" data-category="specialty">
+                        <div class="card product-card h-100 shadow-sm">
+                            <div class="img-wrapper position-relative">
+                                <img src="images/11.avif" class="card-img-top product-img" alt="Fresh Fruit Cake">
+                                <div class="product-overlay">
+                                    <button class="quick-view-btn" data-bs-toggle="modal" data-bs-target="#productModal" data-product="fruitcake">
+                                        <i class="fas fa-eye me-1"></i> Quick View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title h5 text-brown">Fresh Fruit Cake</h3>
+                                <p class="card-text text-light-brown small">Vanilla cake topped with fresh seasonal fruits</p>
+                                <div class="d-flex justify-content-center gap-2 flex-wrap mb-3">
+                                    <span class="flavor-tag">Vanilla</span>
+                                    <span class="flavor-tag">Mixed Fruits</span>
+                                </div>
+                                <p class="price mb-3">P1,050</p>
+                                <a href="order.html" class="btn btn-order-nav">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Cake Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold" style="color: var(--primary-color);">Design Your Own Cake</h2>
+                    <p class="text-light-brown mt-3">Can't find what you're looking for? Let us create a custom cake tailored specifically for your occasion.</p>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Choose your flavors and fillings</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Pick your frosting and decorations</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Add personalized messages or toppers</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Select size and shape</li>
+                    </ul>
+                    <a href="order.html" class="btn btn-primary-custom mt-3">Request Custom Cake</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/12.avif" alt="Custom Cake Design" class="img-fluid rounded-4 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Quick View Modal -->
+    <div class="modal fade custom-modal" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel" style="color: var(--primary-color);">Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Dynamic content loaded via JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <a href="order.html" class="btn btn-primary-custom">Order Now</a>
+                    <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="custom-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h3>Mtee's Cakehouse</h3>
+                    <p>Handcrafted cakes made with love for every special moment.</p>
+                </div>
+                <div class="col-md-2">
+                    <h4>Quick Links</h4>
+                    <p><a href="index.html">Home</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                    <p><a href="products.html">Products</a></p>
+                    <p><a href="order.html">Order</a></p>
+                    <p><a href="feedback.html">Feedback</a></p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Plot 123, Gaborone, Botswana</p>
+                    <p><i class="fas fa-phone"></i> +267 71 234 567</p>
+                    <p><i class="fas fa-envelope"></i> info@mteescakehouse.co.bw</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: #3D2B1F;">
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2026 Mtee's Cakehouse. All rights reserved. | Fresh Baked Daily</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/26771234567" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Set active class based on current page
+        const currentPage = window.location.pathname.split('/').pop() || 'products.html';
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Category Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productItems = document.querySelectorAll('.product-item');
+        const categorySections = document.querySelectorAll('.category-section');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                
+                if (filterValue === 'all') {
+                    // Show all sections and all products
+                    categorySections.forEach(section => {
+                        section.style.display = 'block';
+                    });
+                    productItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                } else {
+                    // Hide all sections first
+                    categorySections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Show only sections that match the filter
+                    productItems.forEach(item => {
+                        if (item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                            // Show the parent section
+                            const parentSection = item.closest('.category-section');
+                            if (parentSection) {
+                                parentSection.style.display = 'block';
+                            }
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Product Modal Data
+        const productData = {
+            chocolate: { name: 'Classic Chocolate Cake', desc: 'Rich chocolate layers with creamy chocolate ganache. Perfect for any celebration.', price: 'P850 per kg', flavors: 'Chocolate, Dark Chocolate' },
+            redvelvet: { name: 'Red Velvet Cake', desc: 'Velvety red cake with smooth cream cheese frosting. A customer favorite!', price: 'P950 per kg', flavors: 'Red Velvet, Cream Cheese' },
+            rainbow: { name: 'Rainbow Celebration Cake', desc: 'Colorful layers with vanilla buttercream. Makes any party brighter!', price: 'P900 per kg', flavors: 'Vanilla, Rainbow' },
+            whitewedding: { name: 'Elegant White Wedding Cake', desc: 'Classic white cake with delicate floral accents. Customizable for your special day.', price: 'Starting from P2,500', flavors: 'Vanilla, Almond' },
+            rustic: { name: 'Rustic Naked Cake', desc: 'Semi-naked cake with fresh berries and greenery. Perfect for rustic weddings.', price: 'Starting from P2,800', flavors: 'Lemon, Berry' },
+            rosegold: { name: 'Rose Gold Elegance Cake', desc: 'Rose gold drip cake with edible pearls. Glamorous and stunning!', price: 'Starting from P3,200', flavors: 'Chocolate, Raspberry' },
+            cupcakeassorted: { name: 'Assorted Cupcakes', desc: 'Box of 6 mixed flavor cupcakes. Great for parties and events!', price: 'P250 per box', flavors: 'Chocolate, Vanilla, Strawberry' },
+            redvelvetcupcake: { name: 'Red Velvet Cupcake', desc: 'Mini red velvet with cream cheese frosting.', price: 'P220 per box of 6', flavors: 'Red Velvet' },
+            cheesecake: { name: 'New York Cheesecake', desc: 'Creamy cheesecake with graham cracker crust and berry topping.', price: 'P1,200', flavors: 'Cheese, Berry Topping' },
+            carrot: { name: 'Carrot Walnut Cake', desc: 'Spiced carrot cake with walnuts and cream cheese frosting.', price: 'P1,100', flavors: 'Carrot, Walnut' },
+            fruitcake: { name: 'Fresh Fruit Cake', desc: 'Vanilla cake topped with fresh seasonal fruits.', price: 'P1,050', flavors: 'Vanilla, Mixed Fruits' }
+        };
+        
+        // Modal Population
+        const productModal = document.getElementById('productModal');
+        if (productModal) {
+            productModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const product = button.getAttribute('data-product');
+                const data = productData[product];
+                
+                const modalBody = document.getElementById('modalBody');
+                if (data && modalBody) {
+                    modalBody.innerHTML = `
+                        <h4 class="h5" style="color: var(--primary-color);">${data.name}</h4>
+                        <p class="text-light-brown mt-2">${data.desc}</p>
+                        <hr>
+                        <p><strong>Price:</strong> ${data.price}</p>
+                        <p><strong>Flavors:</strong> ${data.flavors}</p>
+                        <div class="alert alert-warning mt-3 small">
+                            <i class="fas fa-info-circle"></i> Please allow 48 hours for custom cake orders.
+                        </div>
+                    `;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

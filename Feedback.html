@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Share your feedback with Mtee's Cakehouse. Rate your experience, leave a review, and help us improve.">
+    <meta name="keywords" content="feedback, review, cake feedback, Mtee's Cakehouse review, customer feedback">
+    <meta name="author" content="Mtee's Cakehouse">
+    <title>Feedback | Mtee's Cakehouse</title>
+
+    <!--Favicon-->
+    <link rel="icon" type="image/x-icon" href="logo/logo.png">
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Additional page-specific styles */
+        .rating-stats {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+        }
+        
+        .stat-number-large {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .progress-bar-custom {
+            height: 10px;
+            border-radius: 10px;
+            background-color: rgba(255,255,255,0.3);
+        }
+        
+        .progress-fill {
+            background-color: #FFD700;
+            height: 100%;
+            border-radius: 10px;
+        }
+        
+        .rating-bar-item {
+            margin-bottom: 15px;
+        }
+        
+        .rating-bar-item .row {
+            align-items: center;
+        }
+        
+        .review-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 15px;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .star-display {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        
+        .verified-badge {
+            color: var(--success-color);
+            font-size: 0.8rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            cursor: pointer;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            display: none;
+            padding-top: 10px;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .stat-number-large {
+                font-size: 2rem;
+            }
+            .rating-bar-item .row > div {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar - Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo/logo.png" alt="Mtee's Cakehouse Logo" class="logo-img" style="height: 55px; width: auto;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-order-nav" href="order.html">Order Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero">
+        <div class="container text-center">
+            <h1>We Value Your Feedback</h1>
+            <p class="lead">Your opinion helps us serve you better</p>
+        </div>
+    </section>
+
+    <!-- Feedback Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Left Column: Feedback Form -->
+                <div class="col-lg-7">
+                    <div class="custom-form-container">
+                        <h2 class="display-6 fw-bold" style="color: var(--primary-color);">Share Your Experience</h2>
+                        <p class="form-subtitle">Tell us about your recent order or visit</p>
+                        
+                        <form id="feedbackForm">
+                            <!-- Personal Information -->
+                            <h3 class="h5 fw-semibold mb-3" style="color: var(--primary-color);">
+                                <i class="fas fa-user me-2" style="color: var(--secondary-dark);"></i> About You
+                            </h3>
+                            
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="fullname" class="form-label fw-medium">Full Name <span class="required text-danger">*</span></label>
+                                        <input type="text" id="fullname" name="fullname" class="form-control form-control-custom" required placeholder="Enter your full name">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label fw-medium">Email Address <span class="required text-danger">*</span></label>
+                                        <input type="email" id="email" name="email" class="form-control form-control-custom" required placeholder="your@email.com">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label fw-medium">Phone Number (Optional)</label>
+                                        <input type="tel" id="phone" name="phone" class="form-control form-control-custom" placeholder="+267 71 234 567">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Order Information -->
+                            <h3 class="h5 fw-semibold mt-4 mb-3" style="color: var(--primary-color);">
+                                <i class="fas fa-receipt me-2" style="color: var(--secondary-dark);"></i> Order Details
+                            </h3>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="orderNumber" class="form-label fw-medium">Order Number (Optional)</label>
+                                        <input type="text" id="orderNumber" name="orderNumber" class="form-control form-control-custom" placeholder="e.g., MT-1234">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="visitDate" class="form-label fw-medium">Date of Visit/Order <span class="required text-danger">*</span></label>
+                                        <input type="date" id="visitDate" name="visitDate" class="form-control form-control-custom" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Star Rating Section -->
+                            <h3 class="h5 fw-semibold mt-4 mb-3" style="color: var(--primary-color);">
+                                <i class="fas fa-star me-2" style="color: var(--secondary-dark);"></i> Your Rating
+                            </h3>
+                            
+                            <div class="rating-group mb-3">
+                                <label class="form-label fw-medium">Overall Rating <span class="required text-danger">*</span></label>
+                                <div class="star-rating">
+                                    <input type="radio" id="star5" name="rating" value="5" required>
+                                    <label for="star5" title="Excellent"><i class="fas fa-star"></i></label>
+                                    
+                                    <input type="radio" id="star4" name="rating" value="4">
+                                    <label for="star4" title="Very Good"><i class="fas fa-star"></i></label>
+                                    
+                                    <input type="radio" id="star3" name="rating" value="3">
+                                    <label for="star3" title="Good"><i class="fas fa-star"></i></label>
+                                    
+                                    <input type="radio" id="star2" name="rating" value="2">
+                                    <label for="star2" title="Fair"><i class="fas fa-star"></i></label>
+                                    
+                                    <input type="radio" id="star1" name="rating" value="1">
+                                    <label for="star1" title="Poor"><i class="fas fa-star"></i></label>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cakeRating" class="form-label fw-medium">Cake Quality Rating <span class="required text-danger">*</span></label>
+                                        <select id="cakeRating" name="cakeRating" class="form-select form-select-custom" required>
+                                            <option value="">Select rating</option>
+                                            <option value="excellent">Excellent (5) - Exceeded expectations</option>
+                                            <option value="good">Good (4) - Met expectations</option>
+                                            <option value="average">Average (3) - Nothing special</option>
+                                            <option value="poor">Poor (2) - Needs improvement</option>
+                                            <option value="terrible">Terrible (1) - Very disappointed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="serviceRating" class="form-label fw-medium">Service Rating <span class="required text-danger">*</span></label>
+                                        <select id="serviceRating" name="serviceRating" class="form-select form-select-custom" required>
+                                            <option value="">Select rating</option>
+                                            <option value="excellent">Excellent (5) - Very satisfied</option>
+                                            <option value="good">Good (4) - Satisfied</option>
+                                            <option value="average">Average (3) - Okay</option>
+                                            <option value="poor">Poor (2) - Unsatisfied</option>
+                                            <option value="terrible">Terrible (1) - Very unsatisfied</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="deliveryRating" class="form-label fw-medium">Delivery/Pickup Experience</label>
+                                        <select id="deliveryRating" name="deliveryRating" class="form-select form-select-custom">
+                                            <option value="">Select rating (optional)</option>
+                                            <option value="excellent">Excellent (5)</option>
+                                            <option value="good">Good (4)</option>
+                                            <option value="average">Average (3)</option>
+                                            <option value="poor">Poor (2)</option>
+                                            <option value="terrible">Terrible (1)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="valueRating" class="form-label fw-medium">Value for Money</label>
+                                        <select id="valueRating" name="valueRating" class="form-select form-select-custom">
+                                            <option value="">Select rating (optional)</option>
+                                            <option value="excellent">Excellent (5)</option>
+                                            <option value="good">Good (4)</option>
+                                            <option value="average">Average (3)</option>
+                                            <option value="poor">Poor (2)</option>
+                                            <option value="terrible">Terrible (1)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Favorite Product -->
+                            <div class="form-group mt-3">
+                                <label for="favoriteCake" class="form-label fw-medium">What was your favorite cake?</label>
+                                <select id="favoriteCake" name="favoriteCake" class="form-select form-select-custom">
+                                    <option value="">Select cake (optional)</option>
+                                    <option value="chocolate">Classic Chocolate Cake</option>
+                                    <option value="redvelvet">Red Velvet Cake</option>
+                                    <option value="rainbow">Rainbow Celebration Cake</option>
+                                    <option value="cheesecake">New York Cheesecake</option>
+                                    <option value="carrot">Carrot Walnut Cake</option>
+                                    <option value="fruitcake">Fresh Fruit Cake</option>
+                                    <option value="wedding">Wedding Cake</option>
+                                    <option value="cupcakes">Cupcakes</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Written Feedback -->
+                            <h3 class="h5 fw-semibold mt-4 mb-3" style="color: var(--primary-color);">
+                                <i class="fas fa-comment-dots me-2" style="color: var(--secondary-dark);"></i> Your Thoughts
+                            </h3>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label fw-medium">Your Feedback <span class="required text-danger">*</span></label>
+                                <textarea id="message" name="message" rows="4" class="form-control form-control-custom" required placeholder="Please share your experience, suggestions, or concerns..."></textarea>
+                            </div>
+                            
+                            <div class="form-group mt-3">
+                                <label for="improvement" class="form-label fw-medium">What could we improve? (Optional)</label>
+                                <textarea id="improvement" name="improvement" rows="2" class="form-control form-control-custom" placeholder="Tell us how we can serve you better..."></textarea>
+                            </div>
+                            
+                            <!-- Would you recommend? -->
+                            <div class="form-group mt-3">
+                                <label class="form-label fw-medium">Would you recommend us to friends? <span class="required text-danger">*</span></label>
+                                <div class="d-flex gap-4 flex-wrap">
+                                    <div class="form-check">
+                                        <input type="radio" id="recommendYes" name="recommend" value="yes" class="form-check-input" required>
+                                        <label for="recommendYes" class="form-check-label">Yes, definitely</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="recommendMaybe" name="recommend" value="maybe" class="form-check-input">
+                                        <label for="recommendMaybe" class="form-check-label">Maybe</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="recommendNo" name="recommend" value="no" class="form-check-input">
+                                        <label for="recommendNo" class="form-check-label">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Newsletter Signup -->
+                            <div class="form-group mt-3">
+                                <div class="form-check">
+                                    <input type="checkbox" id="newsletter" name="newsletter" value="yes" class="form-check-input">
+                                    <label for="newsletter" class="form-check-label">
+                                        Subscribe to our newsletter for exclusive offers and updates
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Consent -->
+                            <div class="form-group mt-3">
+                                <div class="form-check">
+                                    <input type="checkbox" id="consent" name="consent" class="form-check-input" required>
+                                    <label for="consent" class="form-check-label">
+                                        I consent to Mtee's Cakehouse storing my information to respond to my feedback <span class="required text-danger">*</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary-custom w-100 mt-3">
+                                <i class="fas fa-paper-plane me-2"></i> Submit Feedback
+                            </button>
+                            
+                            <p class="small text-muted text-center mt-3">
+                                <i class="fas fa-lock me-1"></i> Your feedback helps us improve. Thank you for helping us grow!
+                            </p>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Information Card -->
+                <div class="col-lg-5">
+                    <!-- Customer Rating Stats -->
+                    <div class="rating-stats mb-4">
+                        <div class="text-center mb-3">
+                            <div class="stat-number-large">4.8</div>
+                            <div class="star-display">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="mb-0">Based on 500+ reviews</p>
+                        </div>
+                        
+                        <div class="rating-bar-item">
+                            <div class="row">
+                                <div class="col-4">5 Star</div>
+                                <div class="col-6"><div class="progress-bar-custom"><div class="progress-fill" style="width: 85%"></div></div></div>
+                                <div class="col-2">85%</div>
+                            </div>
+                        </div>
+                        <div class="rating-bar-item">
+                            <div class="row">
+                                <div class="col-4">4 Star</div>
+                                <div class="col-6"><div class="progress-bar-custom"><div class="progress-fill" style="width: 10%"></div></div></div>
+                                <div class="col-2">10%</div>
+                            </div>
+                        </div>
+                        <div class="rating-bar-item">
+                            <div class="row">
+                                <div class="col-4">3 Star</div>
+                                <div class="col-6"><div class="progress-bar-custom"><div class="progress-fill" style="width: 3%"></div></div></div>
+                                <div class="col-2">3%</div>
+                            </div>
+                        </div>
+                        <div class="rating-bar-item">
+                            <div class="row">
+                                <div class="col-4">2 Star</div>
+                                <div class="col-6"><div class="progress-bar-custom"><div class="progress-fill" style="width: 1%"></div></div></div>
+                                <div class="col-2">1%</div>
+                            </div>
+                        </div>
+                        <div class="rating-bar-item">
+                            <div class="row">
+                                <div class="col-4">1 Star</div>
+                                <div class="col-6"><div class="progress-bar-custom"><div class="progress-fill" style="width: 1%"></div></div></div>
+                                <div class="col-2">1%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Info Card -->
+                    <div class="info-card mb-4">
+                        <h3 class="h4"><i class="fas fa-smile me-2"></i> Why Your Feedback Matters</h3>
+                        <ul class="info-list">
+                            <li><i class="fas fa-star"></i> Helps us improve our cakes and service</li>
+                            <li><i class="fas fa-gift"></i> Feedback entries get 10% off next order</li>
+                            <li><i class="fas fa-clock"></i> We respond within 24 hours</li>
+                            <li><i class="fas fa-heart"></i> Your voice shapes our bakery</li>
+                        </ul>
+                        
+                        <div class="policy-box">
+                            <h4 class="h6 fw-bold mb-2" style="color: var(--primary-color);">Customer Recognition</h4>
+                            <p>Rated #1 Cake Shop in Gaborone</p>
+                            <p>98% would recommend us</p>
+                            <p>Excellence in Service Award 2025</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Card -->
+                    <div class="info-card">
+                        <h3 class="h4"><i class="fas fa-headset me-2"></i> Contact Us Directly</h3>
+                        <ul class="info-list">
+                            <li><i class="fas fa-phone"></i> +267 71 234 567</li>
+                            <li><i class="fas fa-envelope"></i> feedback@mteescakehouse.co.bw</li>
+                            <li><i class="fab fa-whatsapp"></i> +267 71 234 567 (WhatsApp)</li>
+                            <li><i class="fab fa-facebook"></i> @mteescakehouse</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Recent Reviews Preview -->
+                    <div class="mt-4">
+                        <h4 class="h6 fw-bold mb-3" style="color: var(--primary-color);">What Customers Are Saying</h4>
+                        <div class="review-card bg-white p-3 shadow-sm mb-3 rounded">
+                            <div class="star-display">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="small text-muted mb-1">"Best cake in town! The red velvet was amazing."</p>
+                            <p class="small mb-0">- Sarah M. <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></p>
+                        </div>
+                        <div class="review-card bg-white p-3 shadow-sm rounded">
+                            <div class="star-display">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="small text-muted mb-1">"Beautiful custom cake for my daughter's birthday. Everyone loved it!"</p>
+                            <p class="small mb-0">- Thabo K. <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="custom-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h3>Mtee's Cakehouse</h3>
+                    <p>Handcrafted cakes made with love for every special moment.</p>
+                </div>
+                <div class="col-md-2">
+                    <h4>Quick Links</h4>
+                    <p><a href="index.html">Home</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                    <p><a href="products.html">Products</a></p>
+                    <p><a href="order.html">Order</a></p>
+                    <p><a href="feedback.html">Feedback</a></p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Plot 123, Gaborone, Botswana</p>
+                    <p><i class="fas fa-phone"></i> +267 71 234 567</p>
+                    <p><i class="fas fa-envelope"></i> info@mteescakehouse.co.bw</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: #3D2B1F;">
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2026 Mtee's Cakehouse. All rights reserved. | Fresh Baked Daily</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/26771234567" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Set active class based on current page
+        const currentPage = window.location.pathname.split('/').pop() || 'feedback.html';
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Set max date for visit (today)
+        const visitDate = document.getElementById('visitDate');
+        if (visitDate) {
+            const today = new Date().toISOString().split('T')[0];
+            visitDate.setAttribute('max', today);
+        }
+        
+        // Email validation function
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // Notification function
+        function showNotification(message, type) {
+            const existingNotification = document.querySelector('.notification-toast');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification-toast ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                    <div class="notification-message">${message.replace(/\n/g, '<br>')}</div>
+                </div>
+                <button class="notification-close">&times;</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification) {
+                    notification.style.animation = 'slideOutRight 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+            
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', () => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            });
+        }
+        
+        // Form Submission
+        const feedbackForm = document.getElementById('feedbackForm');
+        
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const visitDate = document.getElementById('visitDate').value;
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const cakeRating = document.getElementById('cakeRating').value;
+            const serviceRating = document.getElementById('serviceRating').value;
+            const message = document.getElementById('message').value.trim();
+            const recommend = document.querySelector('input[name="recommend"]:checked');
+            const consent = document.getElementById('consent').checked;
+            
+            let isValid = true;
+            let errorMessage = '';
+            
+            if (!fullname) {
+                isValid = false;
+                errorMessage += '• Please enter your full name\n';
+            } else if (fullname.length < 3) {
+                isValid = false;
+                errorMessage += '• Name must be at least 3 characters\n';
+            }
+            
+            if (!email) {
+                isValid = false;
+                errorMessage += '• Please enter your email address\n';
+            } else if (!isValidEmail(email)) {
+                isValid = false;
+                errorMessage += '• Please enter a valid email address\n';
+            }
+            
+            if (!visitDate) {
+                isValid = false;
+                errorMessage += '• Please select your date of visit\n';
+            }
+            
+            if (!rating) {
+                isValid = false;
+                errorMessage += '• Please select an overall rating\n';
+            }
+            
+            if (!cakeRating) {
+                isValid = false;
+                errorMessage += '• Please rate the cake quality\n';
+            }
+            
+            if (!serviceRating) {
+                isValid = false;
+                errorMessage += '• Please rate the service quality\n';
+            }
+            
+            if (!message) {
+                isValid = false;
+                errorMessage += '• Please enter your feedback message\n';
+            } else if (message.length < 10) {
+                isValid = false;
+                errorMessage += '• Message must be at least 10 characters\n';
+            }
+            
+            if (!recommend) {
+                isValid = false;
+                errorMessage += '• Please indicate if you would recommend us\n';
+            }
+            
+            if (!consent) {
+                isValid = false;
+                errorMessage += '• Please consent to our data storage policy\n';
+            }
+            
+            if (isValid) {
+                showNotification('✓ Thank you for your valuable feedback! Your 10% discount code has been sent to your email.', 'success');
+                feedbackForm.reset();
+                document.querySelectorAll('.star-rating input').forEach(input => input.checked = false);
+            } else {
+                showNotification('Please fix the following errors:\n' + errorMessage, 'error');
+            }
+        });
+        
+        // Real-time email validation
+        const emailField = document.getElementById('email');
+        emailField.addEventListener('blur', function() {
+            if (this.value && !isValidEmail(this.value)) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
+        
+        emailField.addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+        });
+    </script>
+</body>
+</html>
