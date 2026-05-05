@@ -1,122 +1,453 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cakehouse Bakery</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Learn about Mtee's Cakehouse - our story, our baker, our commitment to quality and freshness.">
+    <meta name="keywords" content="about Mtee's Cakehouse, bakery story, custom cakes, baker, cakehouse history">
+    <meta name="author" content="Mtee's Cakehouse">
+    <title>About Us | Mtee's Cakehouse</title>
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="styles.css">
+    <!--Favicon-->
+    <link rel="icon" type="image/x-icon" href="logo/logo.png">
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Additional page-specific styles */
+        .value-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 20px;
+            background: var(--bg-warm);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+        
+        .hours-card {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .hours-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .hours-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .chef-quote {
+            font-style: italic;
+            border-left: 3px solid var(--secondary-dark);
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+        
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-detail:hover {
+            background: var(--bg-warm);
+            transform: translateX(5px);
+        }
+        
+        .contact-detail i {
+            font-size: 1.5rem;
+            color: var(--secondary-dark);
+            width: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            .hours-list li {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Cakehouse Bakery</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-          </ul>
+    <!-- Navigation Bar - Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo/logo.png" alt="Mtee's Cakehouse Logo" class="logo-img" style="height: 55px; width: auto;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order.html">Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-order-nav" href="order.html">Order Now</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
-  </header>
 
-  <section class="bg-light text-center py-5">
-    <div class="container">
-      <h1 class="display-4">Welcome to Cakehouse</h1>
-      <p class="lead">Delicious cakes baked fresh every day</p>
-    </div>
-  </section>
+    <!-- Page Hero Section -->
+    <section class="page-hero">
+        <div class="container text-center">
+            <h1>Our Story</h1>
+            <p class="lead">Baking happiness, one cake at a time since 2018</p>
+        </div>
+    </section>
 
-  <!-- Main Content -->
-  <main class="container my-5">
-    <h2 class="text-center mb-4">Our Specialties</h2>
+    <!-- Our Story Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold" style="color: var(--primary-color);">How It All Began</h2>
+                    <p class="text-light-brown mt-3">Mtee's Cakehouse started with a simple dream and a small kitchen. What began as baking for family and friends quickly grew into something much bigger. The love for creating beautiful, delicious cakes turned into a passion that couldn't be contained.</p>
+                    <p class="text-light-brown">In 2018, we opened our first small storefront in Gaborone with just one display case and big dreams. Word spread fast. Soon, we went from baking a few cakes a week to dozens of custom orders for birthdays, weddings, and every celebration in between.</p>
+                    <p class="text-light-brown">Today, Mtee's Cakehouse is known for quality, creativity, and consistency. Every cake that leaves our kitchen is made with the same love and attention to detail as that very first cake baked years ago.</p>
+                    <a href="products.html" class="btn btn-primary-custom mt-3">Explore Our Cakes</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/2.avif" alt="Mtee's Cakehouse Bakery" class="img-fluid rounded-4 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="row">
-      <div class="col-md-4">
-        <img src="https://tse1.mm.bing.net/th/id/OIP.vBx6vxLBDZ73RS55PqbCnwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Chocolate Cake" class="img-fluid rounded shadow mb-4">
-        <h5 class="text-center">Chocolate Delight</h5>
-      </div>
-      <div class="col-md-4">
-        <img src="https://tse4.mm.bing.net/th/id/OIP.9r7MHKm26UaQpjcnADeDOAHaIp?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Vanilla Cake" class="img-fluid rounded shadow mb-4">
-        <h5 class="text-center">Classic Vanilla</h5>
-      </div>
-      <div class="col-md-4">
-        <img src="https://tse4.mm.bing.net/th/id/OIP.8dshQQthhu8X2GycbAP7UwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Red Velvet Cake" class="img-fluid rounded shadow mb-4">
-        <h5 class="text-center">Red Velvet</h5>
-      </div>
-        <img src="https://i.pinimg.com/736x/66/12/13/661213e041fb9e2481ba96a8f4c3310e.jpg" alt="Fruit cake" class="img-fluid rounded shadow mb-4">
-        <h5 class="text-centre">Fruit Cake</h5> 
-    </div>
+    <!-- Core Values Section -->
+    <section class="py-5 bg-warm">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold" style="color: var(--primary-color);">Our Core Values</h2>
+                <p class="text-light-brown">The principles that guide everything we do</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="value-card p-4 text-center shadow-sm">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3 class="h4 text-brown mt-3">Quality First</h3>
+                        <p class="text-light-brown">We use only the finest ingredients, sourced fresh daily. No shortcuts. No compromises.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="value-card p-4 text-center shadow-sm">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="h4 text-brown mt-3">Made with Love</h3>
+                        <p class="text-light-brown">Every cake is handmade with care and attention to detail. Baking is our art.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="value-card p-4 text-center shadow-sm">
+                        <div class="value-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <h3 class="h4 text-brown mt-3">Customer First</h3>
+                        <p class="text-light-brown">Your satisfaction is our priority. We listen, we care, we deliver happiness.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="value-card p-4 text-center shadow-sm">
+                        <div class="value-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="h4 text-brown mt-3">Creativity</h3>
+                        <p class="text-light-brown">Every cake is a canvas. We bring your vision to life with unique designs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <p class="text-center mt-4">Try our cakes and let the taste speak for itself!</p>
-  </main>
+    <!-- Meet the Baker Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <img src="images/chef.avif" alt="Master Baker - Mtee" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold" style="color: var(--primary-color);">Meet Our Master Baker</h2>
+                    <h3 class="h3" style="font-family: 'Dancing Script', cursive; color: var(--secondary-dark);">Martha "Mtee" Thomo</h3>
+                    <p class="text-light-brown mt-3">With over 12 years of baking experience and training from some of the finest pastry schools, Mtee brings passion and expertise to every creation. Her journey began in her grandmother's kitchen, where she learned that baking is about more than just recipes - it's about bringing joy to people's special moments.</p>
+                    <p class="text-light-brown">Mtee specializes in custom celebration cakes, wedding cakes, and unique dessert designs. Her work has been featured in local magazines and at major events across Botswana.</p>
+                    <div class="chef-quote">
+                        <p class="fst-italic text-brown">"Every cake tells a story. I'm honored to be part of your celebrations."</p>
+                        <p class="fw-bold">- Mtee</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Menu Section -->
-  <section class="container my-5">
-    <h2 class="text-center mb-4">Our Menu</h2>
-    <div class="table-responsive">
-      <table class="table table-striped table-bordered text-center">
-        <thead class="table-dark">
-          <tr>
-            <th>Cake</th>
-            <th>Description</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Chocolate Delight</td>
-            <td>Rich chocolate sponge layered with ganache</td>
-            <td>P90</td>
-          </tr>
-          <tr>
-            <td>Classic Vanilla</td>
-            <td>Light vanilla sponge with buttercream frosting</td>
-            <td>P86</td>
-          </tr>
-          <tr>
-            <td>Red Velvet</td>
-            <td>Moist red velvet cake with cream cheese frosting</td>
-            <td>P58</td>
-          </tr>
-          <tr>
-            <td>Fruit Cake</td>
-            <td>Traditional fruit cake packed with dried fruits</td>
-            <td>P100</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <!-- Stats Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, #D2691E, #A0522D);">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">5000+</div>
+                        <p class="mb-0">Cakes Baked</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">1500+</div>
+                        <p class="mb-0">Happy Customers</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">7+</div>
+                        <p class="mb-0">Years of Baking</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <p class="mb-0">Cake Designs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3">
-    <p>&copy; 2026 Mtee's Cakehouse Bakery | Designed by Marang Moreti</p>
-  </footer>
+    <!-- Location & Hours Section -->
+    <section class="py-5 bg-warm">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold" style="color: var(--primary-color);">Visit Our Bakery</h2>
+                <p class="text-light-brown">We'd love to welcome you in person</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="hours-card">
+                        <h3 class="h3 mb-4" style="color: var(--primary-color);">
+                            <i class="fas fa-clock me-2" style="color: var(--secondary-dark);"></i> Opening Hours
+                        </h3>
+                        <ul class="hours-list">
+                            <li><span>Monday - Friday</span><span class="fw-semibold">8:00 AM - 7:00 PM</span></li>
+                            <li><span>Saturday</span><span class="fw-semibold">9:00 AM - 6:00 PM</span></li>
+                            <li><span>Sunday</span><span class="fw-semibold">10:00 AM - 4:00 PM</span></li>
+                            <li><span>Public Holidays</span><span class="fw-semibold">10:00 AM - 3:00 PM</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="hours-card">
+                        <h3 class="h3 mb-4" style="color: var(--primary-color);">
+                            <i class="fas fa-map-marker-alt me-2" style="color: var(--secondary-dark);"></i> Our Location
+                        </h3>
+                        <div class="contact-detail">
+                            <i class="fas fa-location-dot"></i>
+                            <div>
+                                <p class="mb-0 fw-semibold">Address</p>
+                                <p class="text-light-brown mb-0">Plot 123, Main Mall, Gaborone, Botswana</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p class="mb-0 fw-semibold">Phone</p>
+                                <p class="text-light-brown mb-0">+267 71 234 567</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p class="mb-0 fw-semibold">Email</p>
+                                <p class="text-light-brown mb-0">info@mteescakehouse.co.bw</p>
+                            </div>
+                        </div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115603.25934157322!2d25.84714375!3d-24.65822215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ebb5b3c2f5a5e0d%3A0x3a5b7c8d9e0f1a2b!2sGaborone!5e0!3m2!1sen!2sbw!4v1700000000000!5m2!1sen!2sbw" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Bootstrap JS and dependencies -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Call to Action Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, #FF69B4, #D2691E);">
+        <div class="container text-center text-white">
+            <h2 class="display-5 mb-3" style="font-family: 'Dancing Script', cursive;">Ready to Order Your Custom Cake?</h2>
+            <p class="lead mb-4">Tell us your vision and we'll bring it to life</p>
+            <a href="order.html" class="btn btn-light rounded-pill px-4 py-2 fw-bold" style="color: #D2691E;">Order Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="custom-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h3>Mtee's Cakehouse</h3>
+                    <p>Handcrafted cakes made with love for every special moment.</p>
+                </div>
+                <div class="col-md-2">
+                    <h4>Quick Links</h4>
+                    <p><a href="index.html">Home</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                    <p><a href="products.html">Products</a></p>
+                    <p><a href="order.html">Order</a></p>
+                    <p><a href="feedback.html">Feedback</a></p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Plot 123, Gaborone, Botswana</p>
+                    <p><i class="fas fa-phone"></i> +267 71 234 567</p>
+                    <p><i class="fas fa-envelope"></i> info@mteescakehouse.co.bw</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: #3D2B1F;">
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2026 Mtee's Cakehouse. All rights reserved. | Fresh Baked Daily</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/26771234567" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Set active class based on current page
+        const currentPage = window.location.pathname.split('/').pop() || 'about.html';
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '') {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        
+    </script>
 </body>
-
 </html>

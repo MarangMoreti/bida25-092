@@ -1,135 +1,662 @@
+/* ========================================
+   MTEE'S CAKEHOUSE - BOOTSTRAP 5.3 STYLESHEET
+   Custom Styles for Order & Feedback Pages
+   ======================================== */
+
+/* CSS Variables */
+:root {
+    --primary-color: #D2691E;
+    --primary-dark: #A0522D;
+    --secondary-color: #FFB6C1;
+    --secondary-dark: #FF69B4;
+    --accent-color: #F5DEB3;
+    --bg-warm: #FFF8F0;
+    --bg-light: #FFFFFF;
+    --text-dark: #3E2723;
+    --text-gray: #6D4C41;
+    --text-light: #A1887F;
+    --border-color: #FFE0B5;
+    --success-color: #4CAF50;
+    --error-color: #f44336;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+    --transition: all 0.3s ease;
+}
+
+/* Base Body Styles (Complementing Bootstrap) */
 body {
-  font-family: 'Dancing Script', serif;
-  color: #333333;
-  background-color: #0f0f102a;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-   background-image: url(https://threesnackateers.com/wp-content/uploads/2023/05/Cake-Flavor-Slices-1024x683.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--bg-warm);
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-h1, h2, h5 {
-  font-weight: bold;
-  margin-bottom: 20px;
+/* Typography Overrides */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
 }
 
-h2 {
-  font-size: 48px;
+/* Custom Container Max Width (extends Bootstrap) */
+.custom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.navbar {
-  font-family: 'Poppins', sans-serif;
+/* ========================================
+   CUSTOM BUTTON STYLES
+   (Extends Bootstrap btn classes)
+   ======================================== */
+.btn-primary-custom {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50px;
+    padding: 12px 32px;
+    font-weight: 600;
+    transition: var(--transition);
+    border: none;
 }
 
-.navbar-brand {
-  font-weight: 600;
+.btn-primary-custom:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    color: white;
 }
 
-.nav-link {
-  color: white 
-  margin: 0 10px;
+.btn-outline-custom {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 50px;
+    padding: 12px 32px;
+    font-weight: 600;
+    transition: var(--transition);
 }
 
-.nav-link:hover {
-  text-decoration: underline;
+.btn-outline-custom:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
 }
 
-section.bg-light {
-  background-color: #f8f9fa 
+.btn-pink-custom {
+    background-color: var(--secondary-dark);
+    color: white;
+    border-radius: 50px;
+    padding: 12px 32px;
+    font-weight: 600;
+    transition: var(--transition);
+    border: none;
 }
 
-section.bg-light h1 {
-  font-family: 'Dancing Script', serif;
-  font-size: 3rem;
+.btn-pink-custom:hover {
+    background-color: #FF1493;
+    transform: translateY(-2px);
+    color: white;
 }
 
-.contact-container {
-  max-width: 800px;
-  margin: 50px auto;
-  font-family: sans-serif;
+.btn-order-nav {
+    background-color: var(--primary-color);
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: var(--transition);
 }
 
-.field-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
+.btn-order-nav:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    color: white !important;
 }
 
-.form-control {
-  border-radius: 6px;
-  border: 1px solid #ccc;
+/* Submit Button (Full Width) */
+.btn-submit {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 10px;
 }
 
-
-.btn-primary {
-  background-color: #6baf4c;
-  border: none;
+.btn-submit:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
-.btn-primary:hover {
-  background-color: #4c7f2f;
+/* ========================================
+   CUSTOM NAVIGATION (Bootstrap Override)
+   ======================================== */
+.custom-navbar {
+    background-color: var(--bg-light);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-
-img {
-  border: 5px solid #6baf4c;
-  border-radius: 6px;
-  transition: transform 0.3s ease;
+.custom-navbar .navbar-brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
-img:hover {
-  transform: scale(1.05);
+.custom-navbar .navbar-brand span {
+    color: var(--secondary-dark);
 }
 
-main img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 20px 0;
+.custom-navbar .navbar-brand i {
+    font-size: 2rem;
+    color: var(--primary-color);
 }
 
-table {
-  font-family: 'Poppins', sans-serif;
+.custom-nav-link {
+    font-weight: 500;
+    color: var(--text-dark) !important;
+    position: relative;
+    padding-bottom: 4px;
+    transition: var(--transition);
 }
 
-thead {
-  background-color: #6c757d;
-  color: #fff;
+.custom-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-dark);
+    transition: var(--transition);
 }
 
-tbody tr:hover {
-  background-color: #f8f9fa;
-  transform: scale(1.01);
-  transition: 0.2s ease-in-out;
+.custom-nav-link:hover::after,
+.custom-nav-link.active::after {
+    width: 100%;
 }
 
-footer {
-  background-color: #c2bcbc;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+.custom-nav-link.active {
+    color: var(--secondary-dark) !important;
 }
 
-a {
-  color: #4CAF50;
-  text-decoration: none;
+/* ========================================
+   PAGE HERO SECTION (Bootstrap Compatible)
+   ======================================== */
+.page-hero {
+    background: linear-gradient(135deg, rgba(210,105,30,0.85) 0%, rgba(160,82,45,0.9) 100%),
+                url('https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=1600');
+    background-size: cover;
+    background-position: center;
+    padding: 80px 0;
+    text-align: center;
+    color: white;
 }
 
-a:hover {
-  text-decoration: underline;
+.page-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Dancing Script', cursive;
 }
 
-main a[href^="mailto:"] {
-  color: #191818;
-  font-weight: bold;
+.page-hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
+/* ========================================
+   FORM CONTAINER (Shared for Order & Feedback)
+   ======================================== */
+.form-section {
+    padding: 80px 0;
+}
 
+/* Custom Form Styles (Extends Bootstrap) */
+.custom-form-container {
+    background: var(--bg-light);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+}
 
+.custom-form-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+    color: var(--text-gray);
+    margin-bottom: 1.5rem;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Form Group Spacing */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.form-group label .required {
+    color: var(--error-color);
+    margin-left: 3px;
+}
+
+/* Bootstrap Form Control Overrides */
+.form-control-custom,
+.form-select-custom {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--bg-light);
+}
+
+.form-control-custom:focus,
+.form-select-custom:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(210,105,30,0.1);
+}
+
+.form-control-custom.is-invalid:focus,
+.form-select-custom.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(220,53,69,0.25);
+}
+
+/* Validation States */
+.form-control-custom:invalid:not(:placeholder-shown) {
+    border-color: var(--error-color);
+}
+
+.form-control-custom:valid:not(:placeholder-shown) {
+    border-color: var(--success-color);
+}
+
+/* ========================================
+   CARD STYLES (Extends Bootstrap Cards)
+   ======================================== */
+.info-card {
+    background: var(--bg-light);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 100px;
+}
+
+.info-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.info-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--secondary-dark);
+}
+
+.info-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 25px;
+}
+
+.info-list li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-list i {
+    color: var(--secondary-dark);
+    width: 25px;
+}
+
+.policy-box {
+    background: var(--bg-warm);
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.policy-box p {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-bottom: 8px;
+}
+
+/* ========================================
+   STAR RATING (Custom Component)
+   ======================================== */
+.rating-group {
+    margin-bottom: 20px;
+}
+
+.rating-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 0;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: #FFD700;
+}
+
+/* ========================================
+   NOTIFICATION TOAST
+   ======================================== */
+.notification-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--success-color);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    min-width: 300px;
+    max-width: 400px;
+    animation: slideInRight 0.3s ease;
+}
+
+.notification-toast.error {
+    background: var(--error-color);
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   FOOTER STYLES
+   ======================================== */
+.custom-footer {
+    background-color: #2C1810;
+    color: #D4A373;
+    padding: 60px 0 20px;
+    margin-top: 60px;
+}
+
+.custom-footer h3,
+.custom-footer h4 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.custom-footer h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+}
+
+.custom-footer p {
+    margin-bottom: 0.5rem;
+}
+
+.custom-footer a {
+    color: #D4A373;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.custom-footer a:hover {
+    color: var(--secondary-dark);
+}
+
+.custom-footer i {
+    margin-right: 10px;
+    color: var(--secondary-dark);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #3D2B1F;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-icon:hover {
+    background-color: var(--secondary-dark);
+    transform: translateY(-3px);
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #3D2B1F;
+}
+
+/* ========================================
+   WHATSAPP FLOAT BUTTON
+   ======================================== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 999;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128C7E;
+    color: white;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.bg-warm {
+    background-color: var(--bg-warm);
+}
+
+.text-brown {
+    color: var(--text-dark);
+}
+
+.text-light-brown {
+    color: var(--text-gray);
+}
+
+.shadow-custom-sm {
+    box-shadow: var(--shadow-sm);
+}
+
+.shadow-custom-md {
+    box-shadow: var(--shadow-md);
+}
+
+.shadow-custom-lg {
+    box-shadow: var(--shadow-lg);
+}
+
+.rounded-custom {
+    border-radius: 20px;
+}
+
+.hover-lift {
+    transition: var(--transition);
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN (Bootstrap Complementary)
+   ======================================== */
+@media (max-width: 992px) {
+    .page-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .info-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-hero {
+        padding: 60px 0;
+    }
+    
+    .page-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .custom-form-container {
+        padding: 25px;
+    }
+    
+    .custom-footer {
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-form-container {
+        padding: 20px;
+    }
+    
+    .star-rating label {
+        font-size: 1.5rem;
+    }
+    
+    .notification-toast {
+        min-width: 280px;
+        max-width: 320px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease;
+}
